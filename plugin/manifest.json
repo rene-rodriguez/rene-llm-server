@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "id": "rene.llm-server",
+  "name": "LLM Server",
+  "version": "1.0.1",
+  "author": "rene",
+  "license": "MIT",
+  "description": "Start, stop, and restart the local llama.cpp server (llm.sh) from the Omarchy bar.",
+  "kinds": [
+    "bar-widget"
+  ],
+  "entryPoints": {
+    "barWidget": "Panel.qml"
+  },
+  "barWidget": {
+    "displayName": "LLM Server",
+    "description": "Bar icon with start/stop/restart controls for the local llama.cpp server.",
+    "category": "System",
+    "allowMultiple": false,
+    "defaultSection": "right"
+  }
+}
