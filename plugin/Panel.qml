@@ -2,6 +2,14 @@ import QtQuick
 import Quickshell
 import Quickshell.Io
 import qs.Commons
+// `qs.Commons` is imported twice on purpose: the alias is how the theme token is
+// read here (see `Commons.Color.accent` below). An UNQUALIFIED `Color` does not
+// resolve to the theme singleton any more - qt6-base 6.12 (2026-10-15) makes it
+// bind to Qt's built-in `color` VALUE type instead, so `Color.accent` is
+// undefined and the bar icon keeps its unthemed default. Reading
+// `Commons.Color.*` (the form every first-party Omarchy file uses) fixes it;
+// tests/test_theme_contract.py fails if a bare `Color.` comes back.
+import qs.Commons as Commons
 import qs.Ui
 
 BarWidget {
@@ -141,7 +149,7 @@ BarWidget {
     slotSize: Style.bar.statusSlot
     fontSize: Style.font.caption
     active: root.serverState === "running"
-    activeColor: Color.accent
+    activeColor: Commons.Color.accent
     useActiveColor: true
     tooltipText: {
       if (root.busy) return "LLM server: " + root.busyAction + " in progress… Waiting for completion."
